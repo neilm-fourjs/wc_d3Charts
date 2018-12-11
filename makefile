@@ -28,13 +28,19 @@ $(GARFILE): $(PRG1) $(GARXCF) MANIFEST
 
 gar: $(GARFILE)
 
-deploy: $(GARFILE)
+undeploy: 
+	$(info Attempt undeploy of $(GARFILE) ...)
 	gasadmin gar --disable-archive $(GARNAME) | true
 	gasadmin gar --undeploy-archive $(GARNAME) | true
+
+deploy: undeploy $(GARFILE)
+	$(info Attempt deploy of $(GARFILE) ...)
 	gasadmin gar --deploy-archive $(GARFILE)
 	gasadmin gar --enable-archive $(GARNAME)
 
 rungbc: $(GARFILE)
-	killall httpdispatch | true
-	httpdispatch &	
+	$(info Attempt stop / restart of httpdispatch ...)
+	@killall httpdispatch | true 2> /dev/null
+	@sleep 2
+	@httpdispatch &	
 	xdg-open http://localhost:6394/ua/r/wc_d3Charts
