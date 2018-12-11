@@ -1,5 +1,7 @@
 # wc_d3Charts
-An simple Webcomponent that uses the d3 charting library
+A simple Webcomponent that uses the d3 charting library
+
+![screenshot](https://github.com/neilm-fourjs/wc_d3Charts/raw/master/wc_d3Charts.png "Screenshot")
 
 ## Prerequisites
 
