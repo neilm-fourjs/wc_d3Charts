@@ -157,6 +157,6 @@ clean:
 	find . -name \*.4go -exec rm {} \; ;\
 	find . -name \*.4gi -exec rm {} \; ;\
 	find . -name \*.4ge -exec rm {} \; ;\
-	rm -f *.class ;\
+	rm -f *.class *.out *.gar ;\
 	$(cleanextra)
 

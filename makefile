@@ -4,8 +4,6 @@ GARNAME=wc_d3Charts
 GARFILE=$(GARNAME).gar
 GARXCF=wc_d3Charts.xcf
 
-cleanextra=rm $(GARFILE)
-
 fgl_obj1 =  \
 	 wc_d3charts.$(4GLOBJ) \
 	 wc_d3charts_demo.$(4GLOBJ)
@@ -16,6 +14,8 @@ fgl_frm1 =  \
 
 #depend::
 #	echo "making depends";  cd lib ; ./link_lib
+
+all:: gar
 
 PRG1=wc_d3Charts.42r
 
@@ -28,9 +28,13 @@ $(GARFILE): $(PRG1) $(GARXCF) MANIFEST
 
 gar: $(GARFILE)
 
-
 deploy: $(GARFILE)
-	gasadmin gar --disable-archive $(GARNAME) | tee gasadmin.out
-	gasadmin gar --undeploy-archive $(GARNAME) | tee gasadmin.out
+	gasadmin gar --disable-archive $(GARNAME) | true
+	gasadmin gar --undeploy-archive $(GARNAME) | true
 	gasadmin gar --deploy-archive $(GARFILE)
 	gasadmin gar --enable-archive $(GARNAME)
+
+rungbc: $(GARFILE)
+	killall httpdispatch | true
+	httpdispatch &	
+	xdg-open http://localhost:6394/ua/r/wc_d3Charts
