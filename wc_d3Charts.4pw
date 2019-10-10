@@ -64,13 +64,13 @@
   </Settings>
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
-  <Group environment="value:FGLIMAGEPATH=$(ProjectDir):$(FGLDIR)/lib/image2font.txt" id="75644415" label="wc_d3Charts" language="Genero">
-    <Application binaryName="wc_d3Charts" dependencies="14000,1986" id="18736" label="wc_d3Charts">
+  <Group environment="value:FGLIMAGEPATH=$(ProjectDir):$(FGLDIR)/lib/image2font.txt" id="75644415" label="wc_d3Charts" language="Genero" targetDirectory="$(ProjectDir)/../njm_app_bin">
+    <ExtProject filePath="../g2_lib/g2_lib.4pw" id="1745691647"/>
+    <Application binaryName="wc_d3Charts" dependencies="14000,1986,1745691647_14000" id="18736" label="wc_d3Charts">
       <File filePath="src/wc_d3Charts.4gl"/>
       <File filePath="src/wc_d3Charts.per"/>
     </Application>
     <Library binaryName="wc_d3Charts_lib" dependencies="1986" id="14000" label="wc_d3Charts_lib">
-      <File filePath="src/gl_calendar.4gl"/>
       <File filePath="src/wc_d3ChartsLib.4gl"/>
       <File filePath="src/wc_d3ChartsLib.per"/>
     </Library>

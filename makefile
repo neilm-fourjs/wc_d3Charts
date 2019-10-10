@@ -1,46 +1,23 @@
-# Automatic Makefile made by make4js by N.J.M.
 
-GARNAME=wc_d3Charts
-GARFILE=$(GARNAME).gar
-GARXCF=wc_d3Charts.xcf
+PROG=wc_d3Charts
+LIB=../g2_lib
+BASE=$(PWD)
+TRG=../njm_app_bin
 
-fgl_obj1 =  \
-	 wc_d3charts.$(4GLOBJ) \
-	 wc_d3charts_demo.$(4GLOBJ)
+export FGLIMAGEPATH=$(BASE):$(FGLDIR)/lib/image2font.txt
+export FGLRESOURCEPATH=$(BASE)/etc
+export FGLLDPATH=$(TRG):$(GREDIR)/lib
 
-fgl_frm1 =  \
-	 wc_d3charts_demo.$(FRMOBJ) \
-	 wc_d3charts.$(FRMOBJ)
+all: $(TRG)/$(PROG).42r
 
-#depend::
-#	echo "making depends";  cd lib ; ./link_lib
+$(TRG)/$(PROG).42r: src/*.4gl src/*.per
+	gsmake $(PROG).4pw
 
-all:: gar
+update:
+	git pull
 
-PRG1=wc_d3Charts.42r
+run: $(TRG)/$(PROG).42r
+	cd $(TRG) && fglrun $(PROG).42r
 
-include ./Make_fjs.inc
-
-$(GARFILE): $(PRG1) $(GARXCF) MANIFEST
-	$(info Building Genero Archive $(GARFILE) ...)
-	@zip -qr $(GARFILE) MANIFEST $(GARXCF) *.42? webcomponents
-	$(info Done)
-
-gar: $(GARFILE)
-
-undeploy: 
-	$(info Attempt undeploy of $(GARFILE) ...)
-	gasadmin gar --disable-archive $(GARNAME) | true
-	gasadmin gar --undeploy-archive $(GARNAME) | true
-
-deploy: undeploy $(GARFILE)
-	$(info Attempt deploy of $(GARFILE) ...)
-	gasadmin gar --deploy-archive $(GARFILE)
-	gasadmin gar --enable-archive $(GARNAME)
-
-rungbc: $(GARFILE)
-	$(info Attempt stop / restart of httpdispatch ...)
-	@killall httpdispatch | true 2> /dev/null
-	@sleep 2
-	@httpdispatch &	
-	xdg-open http://localhost:6394/ua/r/wc_d3Charts
+clean:
+	gsmake -c $(PROG).4pw
