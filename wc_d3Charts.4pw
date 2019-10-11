@@ -74,5 +74,10 @@
       <File filePath="src/wc_d3ChartsLib.4gl"/>
       <File filePath="src/wc_d3ChartsLib.per"/>
     </Library>
+    <Library binaryName="webcomponent" id="1451174621" label="webcomponent">
+      <File filePath="webcomponents/d3charts/d3charts.html"/>
+      <File filePath="webcomponents/d3charts/d3charts.js"/>
+      <File filePath="webcomponents/d3charts/style.css"/>
+    </Library>
   </Group>
 </Project>
